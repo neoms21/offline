@@ -1,0 +1,23 @@
+{
+  "name": "offline",
+  "authors": [
+    "Manoj Sethi <Manoj.Sethi@atomus.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.8",
+    "bootstrap": "^3.3.7",
+    "ui-bootstrap": "^2.1.3",
+    "angular-ui": "^0.4.0"
+  }
+}
