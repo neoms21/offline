@@ -1,7 +1,5 @@
-console.log('in app');
 var app = angular.module('app', ['ui.bootstrap', 'ui.router', 'ngAnimate'])
     .config(function ($stateProvider, $urlRouterProvider) {
-        console.log('in config');
         $stateProvider
             .state('home', {
                 url: '/',
