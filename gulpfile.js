@@ -1,7 +1,6 @@
 // Include Gulp
 var gulp = require('gulp');
-var babel = require('gulp-babel');
-var gutil = require('gulp-util');
+var del = require('del');
 var config = require('./gulp.config')();
 var $ = require('gulp-load-plugins')({lazy: true});
 // Include plugins
@@ -10,8 +9,6 @@ var plugins = require("gulp-load-plugins")({
     // replaceString: /\bgulp[\-.]/
 });
 
-// Define default destination folder
-var dest = 'www/public/';
 //
 // gulp.task('js', function () {
 //
@@ -46,27 +43,46 @@ gulp.task('wiredep', function () {
         .pipe(gulp.dest(config.client));
 });
 
-gulp.task('optimize',  function () {
-
-    var assets = $.useref({searchPath: './', restore:true});
-    //var templateCache = config.temp + config.templateCache.file;
-    var cssFilter = $.filter('styles/*.css', {restore: true});
-    var jsFilter = $.filter('**/*.js', {restore: true});
-    return gulp
-        .src(config.index)
-       // .pipe($.plumber())
-        // .pipe($.inject(
-        //     gulp.src(templateCache, {read: false}), {
-        //         starttag: '<!-- inject:templates:js -->'
-        //     }))
-        .pipe($.useref())
-        // .pipe(cssFilter)
-        // .pipe($.csso())
-        //  .pipe(jsFilter)
-        //  .pipe($.uglify())
-        //  .pipe($.useref())
-        .pipe(gulp.dest('dist'));
+gulp.task('clean-code', function (done) {
+    var files = [].concat(
+        config.temp + '**/*.js',
+        config.build + '**/*.html',
+        config.build + 'js/**/*.js',
+        config.build + 'css/**/*.css'
+    );
+    clean(files, done);
 });
 
+gulp.task('templatecache',['clean-code'], function() {
+    return gulp
+        .src(config.htmltemplates)
+        .pipe($.minifyHtml({empty: true}))
+        .pipe($.angularTemplatecache(
+            config.templateCache.file,
+            config.templateCache.options
+        ))
+        .pipe(gulp.dest(config.temp));
+});
+
+gulp.task('optimize', ['templatecache'], function () {
+
+    var templateCache = config.temp + config.templateCache.file;
+    return gulp
+        .src(config.index)
+        .pipe($.inject(
+            gulp.src(templateCache, {read: false}), {
+                starttag: '<!-- inject:templates:js -->'
+            }))
+        .pipe($.useref())
+        .pipe($.if('*.js', $.uglify()))
+        .pipe($.if('*.css', $.csso()))
+        .pipe(gulp.dest(config.build));
+});
+
+function clean(path, done) {
+    console.log('Cleaning: ' + $.util.colors.blue(path));
+    del(path, done);
+    done();
+}
 
 //gulp.task('default', ['wired']);

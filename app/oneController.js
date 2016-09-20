@@ -1,4 +1,4 @@
-app.controller('oneController', function ($scope) {
+var oneController = function ($scope) {
     $scope.today = function() {
         $scope.dt = new Date();
     };
@@ -63,4 +63,6 @@ app.controller('oneController', function ($scope) {
 
         return '';
     }
-})
+};
+oneController.$inject = ['$scope'];
+app.controller('oneController', oneController);

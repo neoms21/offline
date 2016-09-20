@@ -1,7 +1,8 @@
-module.exports = function() {
+module.exports = function () {
     var client = './';
     var clientApp = client + 'app/';
-    var temp = './styles/';
+    var styles = './styles/';
+    var temp = './.tmp/';
 
     var config = {
         temp: temp,
@@ -14,13 +15,25 @@ module.exports = function() {
         ],
         client: client,
         build: './build/',
-        css: temp + 'styles.css',
+        htmltemplates: clientApp + '**/*.html',
+        css: styles + 'styles.css',
         index: client + 'index.html',
         js: [
             clientApp + '**/*.js',
+            clientApp + '.tmp/*.js',
             '!' + clientApp + '**/*.spec.js'
         ],
-
+        /**
+         * template cache
+         */
+        templateCache: {
+            file: 'templates.js',
+            options: {
+                module: 'app',
+                standAlone: false,
+                root: 'app/'
+            }
+        },
         bower: {
             json: require('./bower.json'),
             directory: './bower_components/',
@@ -29,7 +42,7 @@ module.exports = function() {
 
     };
 
-    config.getWiredepDefaultOptions = function() {
+    config.getWiredepDefaultOptions = function () {
         var options = {
             bowerJson: config.bower.json,
             directory: config.bower.directory,
