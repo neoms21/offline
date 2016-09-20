@@ -3,15 +3,15 @@ var app = angular.module('app', ['ui.bootstrap', 'ui.router', 'ngAnimate'])
         $stateProvider
             .state('home', {
                 url: '/',
-                templateUrl: 'home.html'
+                templateUrl: 'app/home.html'
             })
             .state('one', {
                 url: '/one',
-                templateUrl: 'one.html',
+                templateUrl: 'app/one.html',
                 controller: 'oneController'
             } ).state('two', {
                 url: '/two',
-                templateUrl: 'two.html',
+                templateUrl: 'app/two.html',
                 controller: 'twoController'
             });
         $urlRouterProvider.otherwise('/');
