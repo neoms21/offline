@@ -1,4 +1,5 @@
 var appRun = function ($stateProvider, $urlRouterProvider) {
+
     $stateProvider
         .state('home', {
             url: '/',
@@ -14,6 +15,19 @@ var appRun = function ($stateProvider, $urlRouterProvider) {
         controller: 'twoController'
     });
     $urlRouterProvider.otherwise('/');
+
+    Offline.on('confirmed-down', function () {
+        console.log('Down');
+    });
+
+    Offline.on('confirmed-up', function () {
+         console.log('Up');
+    });
+
+    // setInterval(function () {
+    //     console.log('in check');
+    //     Offline.check();
+    // }, 5000);
 };
 
 appRun.$inject = ['$stateProvider', '$urlRouterProvider'];

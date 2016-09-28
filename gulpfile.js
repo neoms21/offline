@@ -53,7 +53,7 @@ gulp.task('clean-code', function (done) {
     clean(files, done);
 });
 
-gulp.task('templatecache',['clean-code'], function() {
+gulp.task('templatecache', ['clean-code'], function () {
     return gulp
         .src(config.htmltemplates)
         .pipe($.minifyHtml({empty: true}))
