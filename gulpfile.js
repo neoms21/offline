@@ -31,6 +31,20 @@ gulp.task('inject', ['wiredep'], function () {
         .pipe(gulp.dest(config.client));
 });
 
+gulp.task('replace', function () {
+    gulp
+        .src(['app/app.js'])
+        .pipe($.replace('//REPLACE', 'asdfgh'))
+        .pipe(gulp.dest('replace'))
+
+    gulp
+        .src(['app/oneController.js'])
+        .pipe($.replace('//REPLACE', 'asdfgh'))
+        .pipe(gulp.dest('replace'))
+
+    // clean(config.temp);
+});
+
 gulp.task('wiredep', function () {
     // log('Wire up the bower css js and our app js into the html');
     var options = config.getWiredepDefaultOptions();
@@ -54,14 +68,14 @@ gulp.task('clean-code', function (done) {
 });
 
 gulp.task('templatecache', ['clean-code'], function () {
-    return gulp
-        .src(config.htmltemplates)
-        .pipe($.minifyHtml({empty: true}))
-        .pipe($.angularTemplatecache(
-            config.templateCache.file,
-            config.templateCache.options
-        ))
-        .pipe(gulp.dest(config.temp));
+     return gulp;
+    //     .src(config.htmltemplates)
+    //     .pipe($.minifyHtml({empty: true}))
+    //     .pipe($.angularTemplatecache(
+    //         config.templateCache.file,
+    //         config.templateCache.options
+    //     ))
+    //     .pipe(gulp.dest(config.temp));
 });
 
 gulp.task('optimize', ['templatecache'], function () {

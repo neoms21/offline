@@ -1,1 +1,30 @@
-In two
+<div class="container-fluid" style="margin-top: 30px">
+    <div class="row">
+        <div class="col-md-2">Object Name</div>
+        <div class="col-md-6">
+            <input class="input-sm input" type="text" ng-model="model">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-2">Id:</div>
+        <div class="col-md-6">
+            <input class="input-sm input" type="text" ng-model="id">
+            <input class="input-sm input" type="checkbox" ng-model="isInt">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <button class="btn btn-sm btn-success" ng-click="getData()">Fetch</button>
+        </div>
+    </div>
+    <br>
+    <br>
+    <div class="row">
+        <div class="col-md-12">
+            {{results}}
+        </div>
+    </div>
+
+</div>

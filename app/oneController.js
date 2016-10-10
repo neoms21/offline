@@ -1,11 +1,15 @@
-var oneController = function ($scope) {
+var oneController = function ($scope, Guid) {
 
-    $scope.today = function() {
+    console.log('works');
+    console.log(guid());
+
+//REPLACE
+    $scope.today = function () {
         $scope.dt = new Date();
     };
     $scope.today();
 
-    $scope.clear = function() {
+    $scope.clear = function () {
         $scope.dt = null;
     };
 
@@ -22,13 +26,13 @@ var oneController = function ($scope) {
         return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
     }
 
-    $scope.toggleMin = function() {
+    $scope.toggleMin = function () {
         $scope.options.minDate = $scope.options.minDate ? null : new Date();
     };
 
     $scope.toggleMin();
 
-    $scope.setDate = function(year, month, day) {
+    $scope.setDate = function (year, month, day) {
         $scope.dt = new Date(year, month, day);
     };
 
@@ -51,10 +55,10 @@ var oneController = function ($scope) {
         var date = data.date,
             mode = data.mode;
         if (mode === 'day') {
-            var dayToCheck = new Date(date).setHours(0,0,0,0);
+            var dayToCheck = new Date(date).setHours(0, 0, 0, 0);
 
             for (var i = 0; i < $scope.events.length; i++) {
-                var currentDay = new Date($scope.events[i].date).setHours(0,0,0,0);
+                var currentDay = new Date($scope.events[i].date).setHours(0, 0, 0, 0);
 
                 if (dayToCheck === currentDay) {
                     return $scope.events[i].status;
@@ -65,5 +69,5 @@ var oneController = function ($scope) {
         return '';
     }
 };
-oneController.$inject = ['$scope'];
+oneController.$inject = ['$scope', 'Guid'];
 app.controller('oneController', oneController);

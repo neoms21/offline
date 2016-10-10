@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="app" manifest="build/manifest.appcache">
+<html lang="en" ng-app="app">
 <head>
     <meta charset="UTF-8">
     <title>Offline</title>
@@ -21,13 +21,17 @@
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
     <script src="bower_components/offline/offline.min.js"></script>
-    <script src="bower_components/offlinejs-simulate-ui/offline-simulate-ui.min.js"></script>
+    <script src="bower_components/lodash/dist/lodash.min.js"></script>
+    <script src="bower_components/angular-guid/guid.min.js"></script>
+    <script src="bower_components/uuid/uuid.js"></script>
+    <script src="app/utils.js"></script>
     <!-- endbuild -->
 
     <!-- build:js js/app.js-->
     <script src="app/app.js"></script>
     <script src="app/oneController.js"></script>
     <script src="app/twoController.js"></script>
+    <script src="app/databaseService.js"></script>
     <!-- inject:templates:js -->
     <!-- endinject -->
 
